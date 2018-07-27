@@ -1,3 +1,33 @@
-body{
-    background-color: blue;
+body {
+    background-image: url("https://images.unsplash.com/photo-1514329926535-7f6dbfbfb114?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=c5fd5e4c2178593a7b44dab1bc91941a&auto=format&fit=crop&w=900&q=60");
+}
+
+#transparent {
+    background: rgba(255,255,255,0.5);
+}
+
+label {
+    margin-top: 10px;
+    background: rgba(255,255,255,0.5);
+    font-weight: bold;
+}
+
+h1 {
+    text-align: center;
+}
+
+.button-list {
+    margin: 10px;
+}
+
+.button-submit {
+    margin-top: 10px;
+}
+
+.gif-margin {
+    margin-bottom: 25px;
+}
+
+.panel {
+    background-color: black;
 }

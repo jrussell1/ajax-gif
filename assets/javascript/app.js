@@ -1,17 +1,85 @@
-// Create an array of strings related to a topic. Save it to var topics
+// created array called comics set it equal to topics due to assignment
+var comics = ['Batman', 'The Punisher', 'Wolverine', 'Iron Man','Dare Devil', 'Spawn'];
+var topics = comics;
 
-//take the topics in the array and create buttons in html
-    //try using a loop append a button for each string
+createcomicButtons();
 
-//when user clicks a button page grabs 10 STATIC gif images from the API and places on page
-    //under every gif should display rating
 
-//when click on one of images gif should animate. when clicked again it becomes static again
+// pushed to the end of the array. 
+// function is called place buttons.
+$('#addComic').on('click', function() {
+    var comicEntered = $('#comicInput').val().trim();
+    comics.push(comicEntered);
+    $('#comicInput').val('');
+    createcomicButtons();
+    return false;
+});
 
-//add form to the pg that takes in value from user input box and adds it to topics array
-    //make a function call that takes each topic in array and remakes the buttons on the page
 
-//make mobile responsibe
+$(document.body).on('click', '.button-list', function() {
+    var comicClicked = $(this).data('comic');
+    //string for the Giphy API request and adds comics to the string
+    var queryURL = 'https://api.giphy.com/v1/gifs/search?q=' + comicClicked + '&limit=10&api_key=p55DVrogwsOEFUjB7ocaOrj2lexS37Bo';
 
-//allow users to request additional gifs to be added to the page - each request should add 10 gifs - not 
-    //overwrite the existing ones
+    // Empties the element
+    $('#comics').empty();
+
+    $.ajax({
+        url: queryURL,
+        method: 'GET'
+    }).done(function(response) {
+        var results = response.data;
+        console.log(response);
+        for (i = 0; i < results.length; i++) {
+            //create new variables 
+            var newGif = $('<div class="col-sm-4">');
+            var rating = results[i].rating.toUpperCase();
+            // created p variable so that the rating can be attached
+            var p = $('<p>').html('Rating: ' + rating);
+            //assign img to the img var
+            var img = $('<img>');
+            img.attr('src', results[i].images.fixed_height_small_still.url);
+            img.attr('data-still', results[i].images.fixed_height_small_still.url);
+            img.attr('data-animate', results[i].images.fixed_height_small.url);
+            img.attr('data-clicked', 'still');
+            img.addClass('gif-margin gif center-block panel');
+
+            // Appends the p and img variables to the newGif variable.
+            newGif.append(p);
+            newGif.append(img);
+            // Appends the newGif to html
+            $('#comics').append(newGif);
+        }
+    });
+});
+
+// Pauses the gif and animates gif with a click
+$(document.body).on('click', '.gif', function() {
+    var click = $(this).attr('data-clicked');
+
+    if (click === 'still') {
+        $(this).attr('src', $(this).data('animate'));
+        $(this).attr('data-clicked', 'animated');
+    } else {
+        $(this).attr('src', $(this).data('still'));
+        $(this).attr('data-clicked', 'still');
+    }
+});
+
+
+//
+// FUNCTIONS --------------------------------------------------------------------------------------------------------------
+//
+
+
+//createomicButtons function is called div gets emptied and then loops through the comics array. Button is appened to the 
+//#comicButtons
+function createcomicButtons() {
+    $('#comicButtons').empty();
+
+    for (var i = 0; i < comics.length; i++) {
+        var button = $('<button>').addClass('btn btn-primary button-list');
+        button.attr('data-comic', comics[i]).html(comics[i]);
+        $('#comicButtons').append(button);
+    }
+}
