@@ -1,5 +1,5 @@
 // created array called comics set it equal to topics due to assignment
-var comics = ['Batman', 'The Punisher', 'Wolverine', 'Iron Man','Dare Devil', 'Spawn'];
+var comics = ['Batman', 'Superman', 'Wolverine', 'Iron Man', 'Dare Devil', 'Spawn'];
 var topics = comics;
 
 createcomicButtons();
@@ -45,8 +45,8 @@ $(document.body).on('click', '.button-list', function() {
             img.addClass('gif-margin gif center-block panel');
 
             // Appends the p and img variables to the newGif variable.
-            newGif.append(p);
             newGif.append(img);
+            newGif.append(p);
             // Appends the newGif to html
             $('#comics').append(newGif);
         }
@@ -73,7 +73,8 @@ $(document.body).on('click', '.gif', function() {
 
 
 //createomicButtons function is called div gets emptied and then loops through the comics array. Button is appened to the 
-//#comicButtons
+//#comicButtons 
+
 function createcomicButtons() {
     $('#comicButtons').empty();
 
