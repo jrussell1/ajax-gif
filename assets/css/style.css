@@ -16,16 +16,16 @@ h1 {
     text-align: center;
 }
 
+.row {
+    margin-top: 5px;
+}
+
 .button-list {
     margin: 10px;
 }
 
 .button-submit {
     margin-top: 10px;
-}
-
-.panel {
-    background-color: black;
 }
 
 p {
